@@ -1,0 +1,10 @@
+.popup__container{
+    position: fixed;
+    width: 430px;
+    height: 330px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    top: 195px;
+    left: calc(50% - 215px);
+    z-index: 3;
+}

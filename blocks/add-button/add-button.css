@@ -1,0 +1,25 @@
+.add-button{
+    width: 150px;
+    height: 50px;
+    background-image: url(../../images/Add_Button.svg);
+    transition: 0.5s;
+    cursor: pointer;
+}
+.add-button:hover{
+    background-image: url(../../images/Add_Button_hover.svg);
+}
+
+@media screen and (max-width: 680px) {
+    .add-button{
+        background-image: url(../../images/Add_Button_wide.svg);
+        width: 282px;
+        height: 50px;
+        transition: 0.5s;
+        cursor: pointer;
+    }
+    .add-button:hover{
+        background-image: url(../../images/Add_Button_wide.svg);
+        opacity: 0.6;
+    }
+    
+}
