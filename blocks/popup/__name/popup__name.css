@@ -1,6 +1,6 @@
 .popup__name{
     box-sizing: border-box;
-    margin-top: 54px;
+    margin-top: 0px;
     margin-left: auto;
     margin-right: auto;
     width: 358px;
@@ -19,3 +19,11 @@
 .popup__name:focus{
     outline-style: none;
   }
+
+@media screen and (max-width: 590px){
+    .popup__name{
+        width: 238px;
+        height: 27px;
+    }
+    
+}

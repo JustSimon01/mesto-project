@@ -5,6 +5,17 @@ font-weight: 500;
 font-size: 42px;
 line-height: 48px;
 color: #FFFFFF;
-margin: 0;
-padding: 22px 0px 16px 0px;
+margin:22px 0 0 0 ;
+padding: 0px 0px 0px 12px;
+grid-area: name;
+
+}
+@media screen and (max-width: 542px) {
+    .profile__name{
+        font-size: 27px;
+        line-height: 33px;
+        text-align: center;
+        padding: 0;
+        margin:26px 0 0 0;
+    }   
 }

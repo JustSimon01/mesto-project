@@ -1,5 +1,6 @@
 .popup__heandlers{
-    margin: 0;
+    margin: auto;
     padding: 0;
     border-style: none;
+    display: flex;
 }

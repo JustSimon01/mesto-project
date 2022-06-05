@@ -12,18 +12,17 @@
 </head>
 <body class="page">
     <header class="header">
-        <img class="logo" src="./images/logo_white.svg" alt="лого">
+        <img class="header__logo" src="./images/logo_white.svg" alt="лого">
     </header>
     <main class="main">
     <section class="profile">
         <div class="profile__user">
-         <div class="profile__avatar"></div>
-         <div class="profile__user-info">
-          <p class="profile__name">Жак-Ив Кусто<button class="profile__edit-button"></button></p>
-          <p class="profile__carier">Исследователь океана</p>
+          <div class="profile__avatar"></div>
+            <p class="profile__name">Жак-Ив Кусто</p>
+            <button class="profile__edit-button"></button>
+            <p class="profile__career">Исследователь океана</p>
          </div>
-        </div>
-        <div class="add-button"></div>
+         <div class="profile__add-button"></div>
     </section>
     <section class="cards">
         <div class="card">
@@ -87,12 +86,12 @@
             </div>
         </div>
     </section>
-    <div class="popup">
+    <div class="popup popup_opened">
     <form class="popup__container">
       <h3 class="popup__header">Редактировать профиль</h3>
       <fieldset class="popup__input-container">
         <input class="popup__name" type="text" value="Жак-Ив Кусто">
-        <input class="popup__carier" type="text" value="Исследователь океана">
+        <input class="popup__career" type="text" value="Исследователь океана">
       </fieldset>
       <fieldset class="popup__heandlers">
         <input type="submit" class="popup__save-button" value="Сохранить">
@@ -102,8 +101,7 @@
     </div>
     </main>
     <footer class="footer">
-        <p class="footer__project-name">&copy 2020 Mesto Russia</p>
+        <p class="footer__project-name">&copy; 2020 Mesto Russia</p>
     </footer>
-    
 </body>
 </html>

@@ -4,13 +4,15 @@
     height: 1px;
     overflow: hidden;
     clip: rect(0 0 0 0);
+    opacity: 1;
 
 }
 .like-button+span:hover{
-    background-image: url(../../images/like_hover.svg);
-
+    opacity: 0.6;
 }
 .like-button:checked+span{
 background-image: url(../../images/like_active.svg);
-
+}
+.like-button:checked+span:hover{
+    opacity: 1;
 }

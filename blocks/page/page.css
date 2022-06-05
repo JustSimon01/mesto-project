@@ -6,5 +6,11 @@
     padding-top: 45px;
     padding-bottom: 60px;
     position: relative;
-    border: red solid 1px;
+}
+@media screen and (max-width: 542px) {
+    .page{
+        padding-top: 28px;
+        padding-bottom: 36px;
+    }
+    
 }

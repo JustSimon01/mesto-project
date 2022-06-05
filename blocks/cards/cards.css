@@ -7,3 +7,12 @@ margin: auto;
 padding-top: 51px;
 padding-bottom: 67px;
 }
+
+@media screen  and (max-width: 542px){
+    .cards{
+        padding-top: 36px;
+        padding-bottom: 48px;
+        gap: 20px;
+    }
+    
+}
