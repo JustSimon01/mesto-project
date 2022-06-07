@@ -18,71 +18,53 @@
     <section class="profile">
         <div class="profile__user">
           <div class="profile__avatar"></div>
-            <p class="profile__name">Жак-Ив Кусто</p>
-            <button class="profile__edit-button"></button>
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="profile__edit-button" type="button"></button>
             <p class="profile__career">Исследователь океана</p>
          </div>
-         <div class="profile__add-button"></div>
+         <button class="profile__add-button" type="button"></button>
     </section>
     <section class="cards">
         <div class="card">
             <img class="card__image" src="./images/karelia.jpg" alt="карелия">
             <div class="card__text-block">
              <h2 class="card__text">Карачаевск</h2>
-             <label>
-               <input class="like-button" type="checkbox">
-               <span class="like-button_image"></span>
-             </label>
+<button class="like-button" type="button"></button>
             </div>
         </div>
         <div class="card">
-            <img class="card__image" src="./images/elbrus.jpg" alt="карелия">
+            <img class="card__image" src="./images/elbrus.jpg" alt="Эльбрус">
             <div class="card__text-block">
              <h2 class="card__text">Гора Эльбрус</h2>
-             <label>
-               <input class="like-button" type="checkbox">
-               <span class="like-button_image"></span>
-             </label>
+<button class="like-button" type="button"></button>
             </div>
         </div>
         <div class="card">
-            <img class="card__image" src="./images/dombai.jpg" alt="карелия">
+            <img class="card__image" src="./images/dombai.jpg" alt="Домбай">
             <div class="card__text-block">
              <h2 class="card__text">Домбай</h2>
-             <label>
-               <input class="like-button" type="checkbox">
-               <span class="like-button_image"></span>
-             </label>
+             <button class="like-button" type="button"></button>
             </div>
         </div>
         <div class="card">
-            <img class="card__image" src="./images/elbrus.jpg" alt="карелия">
+            <img class="card__image" src="./images/elbrus.jpg" alt="Эльбрус">
             <div class="card__text-block">
              <h2 class="card__text">Гора Эльбрус</h2>
-             <label>
-               <input class="like-button" type="checkbox">
-               <span class="like-button_image"></span>
-             </label>
+<button class="like-button like-button_active" type="button"></button>
             </div>
         </div>
         <div class="card">
-            <img class="card__image" src="./images/dombai.jpg" alt="карелия">
+            <img class="card__image" src="./images/dombai.jpg" alt="Домбай">
             <div class="card__text-block">
              <h2 class="card__text">Домбай</h2>
-             <label>
-               <input class="like-button" type="checkbox">
-               <span class="like-button_image"></span>
-             </label>
+<button class="like-button like-button_active" type="button"></button>
             </div>
         </div>
         <div class="card">
             <img class="card__image" src="./images/karelia.jpg" alt="карелия">
             <div class="card__text-block">
              <h2 class="card__text">Карачаево-Черкесск</h2>
-             <label>
-               <input class="like-button" type="checkbox">
-               <span class="like-button_image"></span>
-             </label>
+<button class="like-button like-button_active" type="button"></button>
             </div>
         </div>
     </section>
@@ -94,7 +76,9 @@
         <input class="popup__career" type="text" value="Исследователь океана">
       </fieldset>
       <fieldset class="popup__heandlers">
-        <input type="submit" class="popup__save-button" value="Сохранить">
+       <button class="popup__save-button">
+        <input type="submit" class="popup__save-button-submit" value="Сохранить">
+       </button>
       </fieldset>
       <button class="popup__close-button"></button>
     </form>

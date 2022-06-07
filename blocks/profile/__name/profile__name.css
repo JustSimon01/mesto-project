@@ -7,7 +7,11 @@ line-height: 48px;
 color: #FFFFFF;
 margin:22px 0 0 0 ;
 padding: 0px 0px 0px 12px;
-grid-area: name;
+grid-area: text;
+text-overflow: ellipsis;
+white-space: nowrap;
+overflow: hidden;
+max-width: 294px;
 
 }
 @media screen and (max-width: 542px) {
@@ -16,6 +20,7 @@ grid-area: name;
         line-height: 33px;
         text-align: center;
         padding: 0;
-        margin:26px 0 0 0;
+        margin: 26px 0 0 0;
+        max-width: 189px;
     }   
 }

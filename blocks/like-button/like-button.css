@@ -1,18 +1,17 @@
-.like-button[type="checkbox"]{
-    position: absolute;
-    width: 1px; 
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    opacity: 1;
+.like-button{
+padding: 0;
+border: none;
+background-color: transparent;
+height: 19px;
+width: 22px;
+background-image: url(../../images/like.svg);
+background-repeat: no-repeat;
+margin-right: 5px;
+margin-top: 5px;
+cursor: pointer;
+transition: 0.5s;
+}
 
-}
-.like-button+span:hover{
+.like-button:hover{
     opacity: 0.6;
-}
-.like-button:checked+span{
-background-image: url(../../images/like_active.svg);
-}
-.like-button:checked+span:hover{
-    opacity: 1;
 }

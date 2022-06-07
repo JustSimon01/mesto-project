@@ -1,12 +1,10 @@
 .profile__user{
-    min-width: 474px;
-    height: 120px;
     display: grid;
     grid-template-columns: 120px auto 24px;
     grid-template-rows: repeat(2, 60px);
     grid-template-areas:
-    "avatar name edit"
-    "avatar career .";
+    "avatar text edit"
+    "avatar text .";
     gap: 0 18px;
 }
 
@@ -17,12 +15,14 @@
         grid-template-columns: auto;
         grid-template-rows: repeat(3, auto);
         grid-template-areas:
-        "avatar avatar "
-        "name edit"
-        "career career";
+        "avatar ."
+        "avatar ."
+        "text edit"
+        "text .";
         gap:0;
         min-width: auto;
         justify-items: center;
         padding-bottom: 36px;
+        margin-left: 28px;
     }   
 }

@@ -5,11 +5,14 @@ font-weight: 400;
 font-size: 18px;
 line-height: 22px;
 color: #FFFFFF;
-margin: 16px 0 0 0;
+margin: 77px 0 0 0;
 padding: 0px 0px 0px 12px;
-grid-area: career;
-display: flex;
+grid-area: text;
 align-items: flex-start;
+text-overflow: ellipsis;
+white-space: nowrap;
+overflow: hidden;
+max-width: 294px;
 }
 @media screen and (max-width: 542px) {
     .profile__career{
@@ -17,6 +20,7 @@ align-items: flex-start;
         line-height: 17px;
         text-align: center;
         padding: 0;
-        margin: 14px 0 0 0;
+        margin: 66px 0 0 0;
+        max-width: 189px;
     }   
 }
