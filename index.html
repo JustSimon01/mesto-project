@@ -69,6 +69,7 @@
         </div>
     </section>
     <div class="popup popup_opened">
+        <!-- нужно переверстать данный блок, кнопку закрытия вынести наружу-->
     <form class="popup__container">
       <h3 class="popup__header">Редактировать профиль</h3>
       <fieldset class="popup__input-container">
@@ -76,12 +77,14 @@
         <input class="popup__career" type="text" value="Исследователь океана">
       </fieldset>
        <button class="popup__save-button">Сохранить</button>
-      <button class="popup__close-button"></button>
+       <button type="button" class="popup__close-button"></button>
     </form>
     </div>
     </main>
     <footer class="footer">
         <p class="footer__project-name">&copy; 2020 Mesto Russia</p>
     </footer>
+    <script src="./blocks/popup/__close-button/popup__close-button.js"></script>
+    <script src="./blocks/profile/__edit-button/profile__edit-button.js"></script>
 </body>
 </html>
