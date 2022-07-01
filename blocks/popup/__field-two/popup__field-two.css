@@ -1,4 +1,4 @@
-.popup__career{
+.popup__field-two{
     box-sizing: border-box;
     margin-top: 30px;
     margin-left: auto;
@@ -15,11 +15,11 @@
     line-height: 17px;
     color: #000000;
 }
-.popup__career:focus{
+.popup__field-two:focus{
     outline-style: none;
   }
   @media screen and (max-width: 590px){
-    .popup__career{
+    .popup__field-two{
         width: 238px;
         height: 27px;
     }

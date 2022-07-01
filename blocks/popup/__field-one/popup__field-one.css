@@ -1,4 +1,4 @@
-.popup__name{
+.popup__field-one{
     box-sizing: border-box;
     width: 358px;
     border-style: none;
@@ -12,12 +12,12 @@
     color: #000000;
 }
 
-.popup__name:focus{
+.popup__field-one:focus{
     outline-style: none;
   }
 
 @media screen and (max-width: 590px){
-    .popup__name{
+    .popup__field-one{
         width: 238px;
     }
     

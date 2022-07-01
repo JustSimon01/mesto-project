@@ -1,8 +1,8 @@
 let profileEditButton = document.querySelector('.profile__edit-button');
-let popupOpened = document.querySelector('.popup');
+
 
 function openPopup(){
-   
+    let popupOpened = document.querySelector('#profileEdit').closest('.popup');
     popupOpened.classList.add('popup_opened');
 
 }
