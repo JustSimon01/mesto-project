@@ -1,5 +1,8 @@
 .popup__input-container{
     border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
     margin: 0;
     padding: 54px 0 48px 0;
     border-style: none;

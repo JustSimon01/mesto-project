@@ -1,23 +1,24 @@
 .popup__field-two{
-    box-sizing: border-box;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 358px;
-    height: 27px;
-    border-style: none;
-    border-bottom: 1px solid rgb(0, 0, 0, 0.2);
-    padding: 0 0 13px 0;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    color: #000000;
+  box-sizing: border-box;
+  width: 358px;
+  border-style: none;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+  padding: 0 0 13px 0;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  background: transparent;
 }
 .popup__field-two:focus{
     outline-style: none;
   }
+
+  .popup__field-two:invalid {
+    border-bottom: 1px solid #FF0000;
+} 
   @media screen and (max-width: 590px){
     .popup__field-two{
         width: 238px;
