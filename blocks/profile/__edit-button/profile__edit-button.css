@@ -6,6 +6,7 @@
     background-size: contain;
     padding: 0;
     border: none;
+    outline: none;
     background-color: transparent;
     transition: 0.5s;
     cursor: pointer;

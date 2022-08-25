@@ -1,12 +1,33 @@
 //открыть попап
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeHotkey);
+  document.addEventListener('click', closeOverlay);
 } 
 
 //закрыть попап
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closeHotkey);
+    document.removeEventListener('click', closeOverlay);
 } 
+
+//закрытие попапа через Esc
+function closeHotkey(evt) {
+  const activePopup = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape'){
+    console.log(evt);
+    closePopup(activePopup);
+  }
+}
+
+//закрытие попапа через клик оверлея
+function closeOverlay(evt) {
+  const activePopup = document.querySelector('.popup_opened');
+  if (evt.target.classList.contains('popup_opened')){
+    closePopup(activePopup);
+  }
+}
 
 // Card Add button
 const profileAddButton = document.querySelector('.profile__add-button');
@@ -28,6 +49,7 @@ function openProfileEdit (){
 
 profileEditButton.addEventListener('click', openProfileEdit);
 profilePopupCloseButton.addEventListener('click', function(){closePopup(profileEditPopup)});
+
 
 //Profile Save Button
 const profileForm = document.querySelector('#profileEdit');
@@ -79,8 +101,8 @@ function createCard (cardName, cardLink) {
       cardImage.addEventListener('click', function (evt) {
       fullImage.src = cardImage.src;
       fullImage.alt = cardImage.alt;
-      placeName.textContent = cardImage.alt
-      fullImagePopup.closest('.popup').classList.toggle('popup_opened');
+      placeName.textContent = cardImage.alt;
+      openPopup(fullImagePopup);
   });
 return cardElement; 
 }
@@ -111,3 +133,15 @@ function addNewPlace (evt){
   evt.target.reset();
 };
 cardUploadForm.addEventListener('submit', addNewPlace);
+
+//редактирование профиля
+const profileAvatar = document.querySelector('.profile__avatar');
+const profileIcon = document.querySelector('.profile__avatar-edit');
+const avatarEditPopup = document.querySelector('#change-avatar').closest('.popup');
+
+function profileIconEdit(){
+  profileIcon.classList.toggle('profile__avatar-edit_active');
+};
+profileAvatar.addEventListener('mouseover', profileIconEdit);
+profileAvatar.addEventListener('mouseout', profileIconEdit);
+profileAvatar.addEventListener('click', function(){openPopup(avatarEditPopup)});
