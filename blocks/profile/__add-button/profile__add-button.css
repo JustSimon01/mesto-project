@@ -10,6 +10,7 @@
     background-color: transparent;
     padding: 0;
     border: none;
+    outline: none;
 }
 .profile__add-button:hover{
     opacity: 0.6;

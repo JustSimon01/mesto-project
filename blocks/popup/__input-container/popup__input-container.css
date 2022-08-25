@@ -1,12 +1,12 @@
 .popup__input-container{
     border: none;
     margin: 0;
-    padding: 54px 0 48px 36px;
+    padding: 54px 0 48px 0;
     border-style: none;
 }
 @media screen and (max-width: 590px){
     .popup__input-container{
-        padding: 75px 0 45px 22px;
+        padding: 75px 0 45px 0;
     }
     
 }
