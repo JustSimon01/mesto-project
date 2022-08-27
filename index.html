@@ -46,11 +46,11 @@
       <h3 class="popup__header">Редактировать профиль</h3>
       <fieldset class="popup__input-container">
         <label class="popup__form-field">
-           <input class="popup__input" id="name-input" type="text" placeholder="Введите имя и фамилию" required value="" minlength="2" maxlength="40" required>
+           <input class="popup__input" id="name-input" type="text" placeholder="Введите имя и фамилию" value="" minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$" data-error-message="Поле может содержать только латинские буквы, кириллические буквы, знаки дефиса и пробелы" required>
            <span class="popup__input-error name-input-error"></span>
         </label>
         <label class="popup__form-field">
-          <input class="popup__input" id="about-input" type="text" placeholder="Кем вы работаете?" required value="" minlength="2" maxlength="200" required>
+          <input class="popup__input" id="about-input" type="text" placeholder="Кем вы работаете?" value="" minlength="2" maxlength="200" pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$" data-error-message="Поле может содержать только латинские буквы, кириллические буквы, знаки дефиса и пробелы" required>
           <span class="popup__input-error about-input-error"></span>
         </label>
       </fieldset>
@@ -65,11 +65,11 @@
           <h3 class="popup__header">Новое место</h3>
           <fieldset class="popup__input-container">
             <label class="popup__form-field">
-              <input class="popup__input" id="card-name-input" type="text" required placeholder="Название" value="">
+              <input class="popup__input" id="card-name-input" type="text" placeholder="Название" value="" minlength="2" maxlength="30" pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$" data-error-message="Поле может содержать только латинские буквы, кириллические буквы, знаки дефиса и пробелы" required>
               <span class="popup__input-error card-name-input-error"></span>
             </label>
             <label class="popup__form-field">
-              <input class="popup__input" id="link-input" type="text" required placeholder="Ссылка на картинку" value="">
+              <input class="popup__input" id="link-input" type="url" placeholder="Ссылка на картинку" value="" required>
               <span class="popup__input-error link-input-error"></span>
             </label>
           </fieldset>
@@ -102,7 +102,7 @@
     <h3 class="popup__header">Обновить аватар</h3>
     <fieldset class="popup__input-container">
       <label class="popup__form-field">
-        <input class="popup__input" id="avatar-link-input" type="text" placeholder="Вставьте ссылку" required value="">
+        <input class="popup__input" id="avatar-link-input" type="url" placeholder="Вставьте ссылку" value="" minlength="2" maxlength="40" required>
         <span class="popup__input-error avatar-link-input-error"></span>
       </label>
     </fieldset>

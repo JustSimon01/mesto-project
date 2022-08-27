@@ -58,6 +58,14 @@ const aboutInput = profileForm.querySelector('#about-input');
 const profileName = document.querySelector('.profile__name');
 const profileCareer = document.querySelector('.profile__career');
 
+//первичная подгрузка форм
+function profileFirstUpload(){
+  nameInput.value =`${profileName.textContent}`;
+  aboutInput.value=`${profileCareer.textContent}`;
+};
+
+profileFirstUpload();
+
 function submitProfileForm (evt) {
   evt.preventDefault();
   profileName.textContent=`${nameInput.value}`;
@@ -73,6 +81,7 @@ console.log(evt.target.validity.valid);
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  console.log (errorElement);
   inputElement.classList.add('popup__input_error');
   errorElement.textContent = errorMessage;
   errorElement.classList.add('popup__input-error_active');
@@ -84,25 +93,50 @@ const hideInputError = (formElement, inputElement) => {
   errorElement.textContent = '';
   errorElement.classList.remove('popup__input-error_active');
 };
-
 //проверка валидности поля
 const isValid = (formElement, inputElement) => {
+  if (inputElement.validity.patternMismatch) {
+    inputElement.setCustomValidity(inputElement.dataset.errorMessage);
+  } else {
+    inputElement.setCustomValidity("");
+  }
+
   if (!inputElement.validity.valid){
     showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
-    hideInputError(inputElement);
+    hideInputError(formElement, inputElement);
   };
 };
 //слушатели событий для всех элементов формы
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+  const buttonElement = formElement.querySelector('.popup__save-button');
+  toggleButtonState(inputList, buttonElement);
+
   inputList.forEach((inputElement) => {
   inputElement.addEventListener('input', () => {
-    isValid(formElement, inputElement)
-  });
-  console.log(inputElement.id);
-});
+    isValid(formElement, inputElement);
+    toggleButtonState(inputList, buttonElement);
+  })
+})
 };
+
+//проверяем прошла ли валидация
+const hasInvalidInput = (inputList) =>{
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  })
+};
+
+//отключение кнопки сохранения
+const toggleButtonState = (inputList, buttonElement) =>{
+  if(hasInvalidInput(inputList)){
+    buttonElement.classList.add('popup__save-button_disabled');
+  } else {
+    buttonElement.classList.remove('popup__save-button_disabled');
+  }
+};
+
 
 //добавляем обработчики всем формам
 const enableValidation = () =>{
