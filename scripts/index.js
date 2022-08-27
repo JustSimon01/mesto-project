@@ -42,7 +42,7 @@ const profileEditPopup = document.querySelector('#profileEdit').closest('.popup'
 const profilePopupCloseButton = profileEditPopup.querySelector('.popup__close-button');
 
 function openProfileEdit (){
-  jobInput.value = profileCareer.textContent;
+  aboutInput.value = profileCareer.textContent;
   nameInput.value = profileName.textContent;
   openPopup(profileEditPopup);
 };
@@ -51,21 +51,107 @@ profileEditButton.addEventListener('click', openProfileEdit);
 profilePopupCloseButton.addEventListener('click', function(){closePopup(profileEditPopup)});
 
 
-//Profile Save Button
+//Валидация и сохранение профиля
 const profileForm = document.querySelector('#profileEdit');
-const nameInput = profileForm.querySelector('.popup__field-one');
-const jobInput = profileForm.querySelector('.popup__field-two');
+const nameInput = profileForm.querySelector('#name-input');
+const aboutInput = profileForm.querySelector('#about-input');
 const profileName = document.querySelector('.profile__name');
 const profileCareer = document.querySelector('.profile__career');
 
+//первичная подгрузка форм
+function profileFirstUpload(){
+  nameInput.value =`${profileName.textContent}`;
+  aboutInput.value=`${profileCareer.textContent}`;
+};
+
+profileFirstUpload();
+
 function submitProfileForm (evt) {
-    evt.preventDefault();
-    profileName.textContent=`${nameInput.value}`;
-    profileCareer.textContent=`${jobInput.value}`;
-    closePopup(profileEditPopup);
+  evt.preventDefault();
+  profileName.textContent=`${nameInput.value}`;
+  profileCareer.textContent=`${aboutInput.value}`;
+  closePopup(profileEditPopup);
 };
 profileForm.addEventListener('submit', submitProfileForm);
- 
+nameInput.addEventListener('input', function (evt) {
+console.log(evt.target.validity.valid);
+}); 
+
+//функции показа ошибки
+
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  console.log (errorElement);
+  inputElement.classList.add('popup__input_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('popup__input-error_active');
+};
+
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove('popup__input_error');
+  errorElement.textContent = '';
+  errorElement.classList.remove('popup__input-error_active');
+};
+//проверка валидности поля
+const isValid = (formElement, inputElement) => {
+  if (inputElement.validity.patternMismatch) {
+    inputElement.setCustomValidity(inputElement.dataset.errorMessage);
+  } else {
+    inputElement.setCustomValidity("");
+  }
+
+  if (!inputElement.validity.valid){
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  };
+};
+//слушатели событий для всех элементов формы
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+  const buttonElement = formElement.querySelector('.popup__save-button');
+  toggleButtonState(inputList, buttonElement);
+
+  inputList.forEach((inputElement) => {
+  inputElement.addEventListener('input', () => {
+    isValid(formElement, inputElement);
+    toggleButtonState(inputList, buttonElement);
+  })
+})
+};
+
+//проверяем прошла ли валидация
+const hasInvalidInput = (inputList) =>{
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  })
+};
+
+//отключение кнопки сохранения
+const toggleButtonState = (inputList, buttonElement) =>{
+  if(hasInvalidInput(inputList)){
+    buttonElement.classList.add('popup__save-button_disabled');
+  } else {
+    buttonElement.classList.remove('popup__save-button_disabled');
+  }
+};
+
+
+//добавляем обработчики всем формам
+const enableValidation = () =>{
+  const formList = Array.from(document.querySelectorAll('.popup__form'));
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+  });
+  setEventListeners(formElement);
+});
+};
+
+enableValidation();
+
+
 //попап открытия картинки
 const fullImagePopup = document.querySelector('.popup__image-container').closest('.popup');
 const fullImagePopupClose = fullImagePopup.querySelector('.popup__close-button');
@@ -125,7 +211,7 @@ const cardUploadForm = document.querySelector('#cardUpload');
 
 function addNewPlace (evt){
   evt.preventDefault();
-  const cardName = cardUploadForm.querySelector('.popup__field-one').value;
+  const cardName = cardUploadForm.querySelector('.popup__input').value;
   const cardLink = cardUploadForm.querySelector('.popup__field-two').value;
  renderCard(createCard(cardName, cardLink), cardTemplate, true);
   const popupClose = cardUploadForm.closest('.popup');
@@ -138,6 +224,9 @@ cardUploadForm.addEventListener('submit', addNewPlace);
 const profileAvatar = document.querySelector('.profile__avatar');
 const profileIcon = document.querySelector('.profile__avatar-edit');
 const avatarEditPopup = document.querySelector('#change-avatar').closest('.popup');
+const avatarEditCloseButton = avatarEditPopup.querySelector('.popup__close-button');
+
+avatarEditCloseButton.addEventListener('click', function(){closePopup(avatarEditPopup)});
 
 function profileIconEdit(){
   profileIcon.classList.toggle('profile__avatar-edit_active');
