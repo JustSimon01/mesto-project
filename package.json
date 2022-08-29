@@ -1,0 +1,19 @@
+{
+  "name": "mesto-project",
+  "version": "1.0.0",
+  "description": "* Описание\r * Функциональность\r * Использованные технологии\r * Figma",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JustSimon01/mesto-project.git"
+  },
+  "author": "Simon Chekhov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JustSimon01/mesto-project/issues"
+  },
+  "homepage": "https://github.com/JustSimon01/mesto-project#readme"
+}
