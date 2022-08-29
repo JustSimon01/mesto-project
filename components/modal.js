@@ -18,7 +18,6 @@ export function closePopup(popup) {
 export function closeHotkey(evt) {
   const activePopup = document.querySelector('.popup_opened');
   if (evt.key === 'Escape'){
-    console.log(evt);
     closePopup(activePopup);
   }
 }
@@ -56,3 +55,13 @@ aboutInput.value = profileCareer.textContent;
 nameInput.value = profileName.textContent;
 openPopup(profileEditPopup);
 };
+
+export function changeAvatar(evt) {
+  evt.preventDefault();
+  const avatarEditPopup = document.querySelector('#change-avatar').closest('.popup');
+  const avatarLink = document.querySelector('#avatar-link-input');
+  const avatar = document.querySelector(".profile__avatar");
+  avatar.style.backgroundImage = `url(${avatarLink.value})`;
+  evt.target.reset();
+  closePopup(avatarEditPopup);
+}

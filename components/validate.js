@@ -3,7 +3,6 @@
 //функции показа ошибки
 export const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  console.log (errorElement);
   inputElement.classList.add('popup__input_error');
   errorElement.textContent = errorMessage;
   errorElement.classList.add('popup__input-error_active');

@@ -1,5 +1,5 @@
 import {initialCards} from './cards-massive.js';
-import {openPopup, closePopup, closeHotkey, closeOverlay, profileFirstUpload, submitProfileForm, profileIconEdit, openProfileEdit} from './modal.js';
+import {openPopup, closePopup, closeHotkey, closeOverlay, profileFirstUpload, submitProfileForm, profileIconEdit, openProfileEdit, changeAvatar} from './modal.js';
 import {createCard, renderCard, addNewPlace} from './card.js';
 import {profileAddButton, cardPopupCloseButton, profileEditButton, profilePopupCloseButton, profileForm, nameInput, fullImagePopupClose, cardUploadForm, cardUploadPopup, cardTemplate, fullImagePopup, avatarEditCloseButton, profileAvatar, profileEditPopup, avatarEditPopup} from './utils.js';
 import {showInputError, hideInputError, isValid, setEventListeners, hasInvalidInput, toggleButtonState, enableValidation} from './validate.js';
@@ -18,9 +18,6 @@ profilePopupCloseButton.addEventListener('click', function(){closePopup(profileE
 profileFirstUpload();
 
 profileForm.addEventListener('submit', submitProfileForm);
-nameInput.addEventListener('input', function (evt) {
-console.log(evt.target.validity.valid);
-}); 
 
 //валидация
 enableValidation();
@@ -40,3 +37,9 @@ avatarEditCloseButton.addEventListener('click', function(){closePopup(avatarEdit
 profileAvatar.addEventListener('mouseover', profileIconEdit);
 profileAvatar.addEventListener('mouseout', profileIconEdit);
 profileAvatar.addEventListener('click', function(){openPopup(avatarEditPopup)});
+
+//подгрузка аватара по ссылке
+const avatarForm = document.querySelector('#change-avatar');
+avatarForm.addEventListener('submit', changeAvatar);
+
+
