@@ -1,3 +1,4 @@
+import '../page/index.css'; //импорт главного файла стилей 
 import {initialCards} from './cards-massive.js';
 import {openPopup, closePopup, closeHotkey, closeOverlay, profileFirstUpload, submitProfileForm, profileIconEdit, openProfileEdit, changeAvatar} from './modal.js';
 import {createCard, renderCard, addNewPlace} from './card.js';

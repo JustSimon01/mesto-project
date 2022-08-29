@@ -8,18 +8,17 @@
     <meta name="description" content="Яндекс Практикум проект Mesto">
     <meta name="keywords" content=" учеба, html, css">
     <meta name="author" content="Семен Чехов">
-    <link rel="stylesheet" href="./page/index.css">
 </head>
 <body class="page">
     <header class="header">
-        <img class="header__logo" src="./images/logo_white.svg" alt="лого">
+        <img class="header__logo" src="<%=require('./images/logo_white.svg')%>" alt="лого">
     </header>
     <main class="main">
     <section class="profile">
         <div class="profile__user">
           <div class="profile__avatar">
             <div class="profile__avatar-edit">
-              <img class="profile__avatar-edit-icon" src="./images/avatarEdit.svg" alt="редактирование">
+              <img class="profile__avatar-edit-icon" src="<%=require('./images/avatarEdit.svg')%>" alt="редактирование">
             </div>
           </div>
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -85,16 +84,6 @@
       <button type="button" class="popup__close-button"></button>
     </div>
 </div>
-<!-- УДАЛЕНИЕ КАРТОЧКИ
-<div class="popup">
-  <div class="popup__container" id="notification">
-    <h3 class="popup__header popup__header_notification">Вы уверенны?</h3>
-    <button class="popup__save-button" type="submit">Да</button>
-   <button type="button" class="popup__close-button"></button>
-  </div>
-  </div>
--->
-<!-- new code -->
 <div class="popup">
   <div class="popup__container">
    <form class="popup__form" id="change-avatar">
@@ -110,12 +99,9 @@
    <button type="button" class="popup__close-button"></button>
   </div>
   </div>
-  <!-- end of new code -->
     </main>
     <footer class="footer">
         <p class="footer__project-name">&copy; 2020 Mesto Russia</p>
     </footer>
-<script type="module" src="./components/cards-massive.js"></script>
-<script type="module" src="./components/index.js"></script>
 </body>
 </html>
