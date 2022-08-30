@@ -1,5 +1,5 @@
-import {card, cardTemplate, fullImage, placeName, fullImagePopup, cardUploadForm} from './utils.js';
-import {openPopup,} from './modal.js';
+import {card, cardTemplate, fullImage, placeName, fullImagePopup, popupNewCard, cardName, cardLink} from './utils.js';
+import {openPopup, closePopup} from './modal.js';
 
 //Добавление карточки
 export function createCard (cardName, cardLink) {
@@ -41,10 +41,7 @@ export function renderCard(card, container, isPrepend=true) {
 //Подгрузка карточек пользователем
 export function addNewPlace (evt){
   evt.preventDefault();
-  const cardName = cardUploadForm.querySelector('#card-name-input').value;
-  const cardLink = cardUploadForm.querySelector('#link-input').value;
- renderCard(createCard(cardName, cardLink), cardTemplate, true);
-  const popupClose = cardUploadForm.closest('.popup');
-  popupClose.classList.remove('popup_opened');
+  renderCard(createCard((cardName.value), (cardLink.value)), cardTemplate, true);
+  closePopup(popupNewCard);
   evt.target.reset();
 };
