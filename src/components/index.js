@@ -3,7 +3,7 @@ import {initialCards} from './cards-massive.js';
 import {openPopup, closePopup, closeHotkey, closeOverlay, profileFirstUpload, submitProfileForm, profileIconEdit, openProfileEdit, changeAvatar} from './modal.js';
 import {createCard, renderCard, addNewPlace} from './card.js';
 import {profileAddButton, cardPopupCloseButton, profileEditButton, profilePopupCloseButton, profileForm, nameInput, fullImagePopupClose, cardUploadForm, cardUploadPopup, cardTemplate, fullImagePopup, avatarEditCloseButton, profileAvatar, profileEditPopup, avatarEditPopup} from './utils.js';
-import {showInputError, hideInputError, isValid, setEventListeners, hasInvalidInput, toggleButtonState, enableValidation} from './validate.js';
+import {showInputError, hideInputError, isValid, setEventListeners, hasInvalidInput, toggleButtonState, enableValidation, inputList, buttonElement} from './validate.js';
 
 profileAddButton.addEventListener('click', function(){openPopup(cardUploadPopup)});
 cardPopupCloseButton.addEventListener('click', function(){closePopup(cardUploadPopup)});

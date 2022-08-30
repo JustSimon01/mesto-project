@@ -54,15 +54,16 @@ export const hasInvalidInput = (inputList) =>{
 export const toggleButtonState = (inputList, buttonElement) =>{
   if(hasInvalidInput(inputList)){
     buttonElement.classList.add('popup__save-button_disabled');
+    buttonElement.disabled = true;
   } else {
     buttonElement.classList.remove('popup__save-button_disabled');
+    buttonElement.disabled = false;
   }
 };
 
 //добавляем обработчики всем формам
 export const enableValidation = () =>{
   const formList = Array.from(document.querySelectorAll('.popup__form'));
-  console.log(formList);
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
@@ -70,3 +71,8 @@ export const enableValidation = () =>{
   setEventListeners(formElement);
 });
 };
+
+//деактивация сабмита после ввода данных
+export const refreshSubmit = () =>{
+  
+}

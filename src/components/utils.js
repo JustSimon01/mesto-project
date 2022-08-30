@@ -10,6 +10,8 @@ export const card = document.querySelector('#card').content;
 
 //Подгрузка карточек пользователем
 export const cardUploadForm = document.querySelector('#cardUpload');
+export const cardName = cardUploadForm.querySelector('#card-name-input');
+export const cardLink = cardUploadForm.querySelector('#link-input');
 
 //редактирование профиля
 export const profileAvatar = document.querySelector('.profile__avatar');
