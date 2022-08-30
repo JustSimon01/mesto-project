@@ -62,6 +62,7 @@ export const toggleButtonState = (inputList, buttonElement) =>{
 //добавляем обработчики всем формам
 export const enableValidation = () =>{
   const formList = Array.from(document.querySelectorAll('.popup__form'));
+  console.log(formList);
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
