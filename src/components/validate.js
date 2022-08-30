@@ -1,21 +1,20 @@
-//Валидация и сохранение профиля
-
+//новый код
 //функции показа ошибки
-export const showInputError = (formElement, inputElement, errorMessage) => {
+export const showInputError = (formElement, inputElement, errorMessage, settings) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_error');
+  inputElement.classList.add(settings.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__input-error_active');
+  errorElement.classList.add(settings.errorClass);
 };
 
-export const hideInputError = (formElement, inputElement) => {
+export const hideInputError = (formElement, inputElement, settings) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_error');
+  inputElement.classList.remove(settings.inputErrorClass);
   errorElement.textContent = '';
-  errorElement.classList.remove('popup__input-error_active');
+  errorElement.classList.remove(settings.errorClass);
 };
 //проверка валидности поля
-export const isValid = (formElement, inputElement) => {
+export const isValid = (formElement, inputElement, settings) => {
   if (inputElement.validity.patternMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
   } else {
@@ -23,22 +22,22 @@ export const isValid = (formElement, inputElement) => {
   }
 
   if (!inputElement.validity.valid){
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, settings);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, settings);
   };
 };
 
 //слушатели событий для всех элементов формы
-export const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonElement = formElement.querySelector('.popup__save-button');
-  toggleButtonState(inputList, buttonElement);
+export const setEventListeners = (formElement, settings) => {
+  const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
+  const buttonElement = formElement.querySelector(settings.submitButtonSelector);
+  toggleButtonState(inputList, buttonElement, settings);
 
   inputList.forEach((inputElement) => {
   inputElement.addEventListener('input', () => {
-    isValid(formElement, inputElement);
-    toggleButtonState(inputList, buttonElement);
+    isValid(formElement, inputElement, settings);
+    toggleButtonState(inputList, buttonElement, settings);
   })
 })
 };
@@ -51,28 +50,24 @@ export const hasInvalidInput = (inputList) =>{
 };
 
 //отключение кнопки сохранения
-export const toggleButtonState = (inputList, buttonElement) =>{
+export const toggleButtonState = (inputList, buttonElement, settings) =>{
   if(hasInvalidInput(inputList)){
-    buttonElement.classList.add('popup__save-button_disabled');
+    buttonElement.classList.add(settings.inactiveButtonClass);
     buttonElement.disabled = true;
   } else {
-    buttonElement.classList.remove('popup__save-button_disabled');
+    buttonElement.classList.remove(settings.inactiveButtonClass);
     buttonElement.disabled = false;
   }
 };
 
 //добавляем обработчики всем формам
-export const enableValidation = () =>{
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
+export const enableValidation = (settings) =>{
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
+      setEventListeners(formElement, settings);
   });
-  setEventListeners(formElement);
+  setEventListeners(formElement, settings);
 });
 };
-
-//деактивация сабмита после ввода данных
-export const refreshSubmit = () =>{
-  
-}

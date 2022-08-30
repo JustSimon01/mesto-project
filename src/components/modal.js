@@ -1,4 +1,4 @@
-import {nameInput, profileName, aboutInput, profileCareer, profileIcon, profileEditPopup} from './utils.js';
+import {nameInput, profileName, aboutInput, profileCareer, profileIcon, profileEditPopup, avatarEditPopup, avatarLink, avatar} from './utils.js';
 
 //открыть попап
 export function openPopup(popup) {
@@ -16,17 +16,16 @@ export function closePopup(popup) {
 
 //закрытие попапа через Esc
 export function closeHotkey(evt) {
-  const activePopup = document.querySelector('.popup_opened');
   if (evt.key === 'Escape'){
+    const activePopup = document.querySelector('.popup_opened');
     closePopup(activePopup);
   }
 }
 
 //закрытие попапа через клик оверлея
 export function closeOverlay(evt) {
-  const activePopup = document.querySelector('.popup_opened');
   if (evt.target.classList.contains('popup_opened')){
-    closePopup(activePopup);
+    closePopup(evt.target);
   }
 }
 
@@ -58,9 +57,6 @@ openPopup(profileEditPopup);
 
 export function changeAvatar(evt) {
   evt.preventDefault();
-  const avatarEditPopup = document.querySelector('#change-avatar').closest('.popup');
-  const avatarLink = document.querySelector('#avatar-link-input');
-  const avatar = document.querySelector(".profile__avatar");
   avatar.style.backgroundImage = `url(${avatarLink.value})`;
   evt.target.reset();
   closePopup(avatarEditPopup);

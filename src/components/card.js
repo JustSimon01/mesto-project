@@ -1,4 +1,4 @@
-import {card, cardTemplate, fullImage, placeName, fullImagePopup, cardUploadForm, cardName, cardLink} from './utils.js';
+import {card, cardTemplate, fullImage, placeName, fullImagePopup, popupNewCard, cardName, cardLink} from './utils.js';
 import {openPopup, closePopup} from './modal.js';
 
 //Добавление карточки
@@ -42,7 +42,6 @@ export function renderCard(card, container, isPrepend=true) {
 export function addNewPlace (evt){
   evt.preventDefault();
   renderCard(createCard((cardName.value), (cardLink.value)), cardTemplate, true);
-  const popupNewCard = cardUploadForm.closest('.popup');
   closePopup(popupNewCard);
   evt.target.reset();
 };
