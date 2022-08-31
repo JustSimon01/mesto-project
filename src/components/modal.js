@@ -1,4 +1,4 @@
-import {nameInput, profileName, aboutInput, profileCareer, profileIcon, profileEditPopup, avatarEditPopup, avatarLink, avatar} from './utils.js';
+import {nameInput, profileName, aboutInput, profileCareer, profileIcon, profileEditPopup, avatarEditPopup, avatarLinkInput, avatar} from './utils.js';
 
 //открыть попап
 export function openPopup(popup) {
@@ -57,7 +57,7 @@ openPopup(profileEditPopup);
 
 export function changeAvatar(evt) {
   evt.preventDefault();
-  avatar.style.backgroundImage = `url(${avatarLink.value})`;
+  avatar.style.backgroundImage = `url(${avatarLinkInput.value})`;
   evt.target.reset();
   closePopup(avatarEditPopup);
 }

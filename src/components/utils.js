@@ -1,3 +1,13 @@
+//объект настроек валидации
+export const settings = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save-button',
+    inactiveButtonClass: 'popup__save-button_disabled',
+    inputErrorClass: 'popup__input_error',
+    errorClass: 'popup__input-error_active'
+  };
+
 //попап открытия картинки
 export const fullImagePopup = document.querySelector('.popup__image-container').closest('.popup');
 export const fullImagePopupClose = fullImagePopup.querySelector('.popup__close-button');
@@ -16,14 +26,15 @@ export const cardUploadForm = document.querySelector('#cardUpload');
 export const cardName = cardUploadForm.querySelector('#card-name-input');
 export const cardLink = cardUploadForm.querySelector('#link-input');
 export const popupNewCard = cardUploadForm.closest('.popup');
+export const cardUploadSubmitButton = cardUploadForm.querySelector(settings.submitButtonSelector);
 
 //редактирование профиля
 export const profileAvatar = document.querySelector('.profile__avatar');
 export const profileIcon = document.querySelector('.profile__avatar-edit');
 export const avatarEditPopup = document.querySelector('#change-avatar').closest('.popup');
+export const avatarSubmitButton = avatarEditPopup.querySelector(settings.submitButtonSelector);
 export const avatarEditCloseButton = avatarEditPopup.querySelector('.popup__close-button');
 export const avatarLinkInput = document.querySelector('#avatar-link-input');
-export const avatarLink = document.querySelector('#avatar-link-input');
 export const avatar = document.querySelector(".profile__avatar");
 
 // Card Add button
