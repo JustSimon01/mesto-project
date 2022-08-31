@@ -1,4 +1,5 @@
-//новый код
+import {settings} from './utils.js';
+
 //функции показа ошибки
 export const showInputError = (formElement, inputElement, errorMessage, settings) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -66,8 +67,13 @@ export const enableValidation = (settings) =>{
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      setEventListeners(formElement, settings);
   });
   setEventListeners(formElement, settings);
 });
 };
+
+//деактивация кнопки сохранения
+export function submitDeactivation (submitButton) {
+  submitButton.classList.add(settings.inactiveButtonClass);
+  submitButton.disabled = true;
+}
