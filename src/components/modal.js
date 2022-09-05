@@ -29,6 +29,28 @@ export function closeOverlay(evt) {
   }
 }
 
+//подгрузка данных профиля с сервера
+export function profileInfo () {
+  return fetch ('https://mesto.nomoreparties.co/v1/plus-cohort-14/users/me',{
+  method: 'GET',
+  headers: {
+    authorization: 'bff12cd7-d8f7-418f-b6b2-2cd8334e6767'
+  }
+})
+  .then((res) => {
+    if (res.ok){
+      return res.json();
+}
+  return Promise.reject(res.status);
+})
+  .then((data)=>{
+    profileName.textContent=data.name;
+    profileCareer.textContent=data.about;
+  })
+}
+
+
+
 //первичная подгрузка имени и "о себе" в форму
 export function profileFirstUpload(){
   nameInput.value =`${profileName.textContent}`;
@@ -38,9 +60,30 @@ export function profileFirstUpload(){
 //связка данных введенных в форму с полями на странице
 export function submitProfileForm (evt) {
   evt.preventDefault();
-  profileName.textContent=`${nameInput.value}`;
-  profileCareer.textContent=`${aboutInput.value}`;
-  closePopup(profileEditPopup);
+
+  fetch('https://mesto.nomoreparties.co/v1/plus-cohort-14/users/me', {
+  method: 'PATCH',
+  headers: {
+    authorization: 'bff12cd7-d8f7-418f-b6b2-2cd8334e6767',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: `${nameInput.value}`,
+    about: `${aboutInput.value}`
+  })
+})
+    .then((res) => {
+      if (res.ok) {
+        profileName.textContent=`${nameInput.value}`;
+        profileCareer.textContent=`${aboutInput.value}`;
+        closePopup(profileEditPopup);
+        return res.json();
+      }else{
+      return Promise.reject(res.status);}
+    })
+    .then((data)=>{
+      console.log (data);
+    })
 };
 
 //редактирование профиля

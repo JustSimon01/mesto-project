@@ -6,8 +6,6 @@ height: 19px;
 width: 22px;
 background-image: url(../../images/like.svg);
 background-repeat: no-repeat;
-margin-right: 5px;
-margin-top: 5px;
 cursor: pointer;
 transition: 0.5s;
 }
