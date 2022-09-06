@@ -8,9 +8,6 @@ export const settings = {
     errorClass: 'popup__input-error_active'
   };
 
-
-export const id = '381c33205e5eec7347c7e4f8';
-
 //попап открытия картинки
 export const fullImagePopup = document.querySelector('.popup__image-container').closest('.popup');
 export const fullImagePopupClose = fullImagePopup.querySelector('.popup__close-button');
@@ -56,3 +53,4 @@ export const nameInput = profileForm.querySelector('#name-input');
 export const profileName = document.querySelector('.profile__name');
 export const aboutInput = profileForm.querySelector('#about-input');
 export const profileCareer = document.querySelector('.profile__career');
+export const profileSubmitButton = profileForm.querySelector(settings.submitButtonSelector);

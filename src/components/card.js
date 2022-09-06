@@ -1,5 +1,7 @@
-import {card, cardTemplate, fullImage, placeName, fullImagePopup, popupNewCard, cardName, cardLink, id} from './utils.js';
-import {openPopup, closePopup} from './modal.js';
+import {card, cardTemplate, fullImage, placeName, fullImagePopup, popupNewCard, cardName, cardLink, cardUploadSubmitButton} from './utils.js';
+import {openPopup, closePopup, saving} from './modal.js';
+import {deleteCard, addLike, deleteLike, addCard} from './api.js'
+import {id} from './index.js'
 
 //Добавление карточки
 export function createCard (cardData, id) {
@@ -8,17 +10,11 @@ export function createCard (cardData, id) {
   const cardText = cardElement.querySelector('.card__text');
         cardPicture.src=cardData.link;
         cardPicture.alt=cardData.name;
-        cardText.textContent=cardData.name;
-      
+        cardText.textContent=cardData.name;    
   const deleteButton = cardElement.querySelector('.card__delete-button');
   if (id === cardData.owner._id){
-    console.log(cardData._id);
     deleteButton.addEventListener('click', function (evt) {
-      fetch (`https://mesto.nomoreparties.co/v1/plus-cohort-14/cards/${cardData._id}`,{
-        method: 'DELETE',
-        headers: {
-        authorization: 'bff12cd7-d8f7-418f-b6b2-2cd8334e6767'}
-      })  
+      deleteCard(cardData)
         .then((res) => {
            if (res.ok) {
            evt.target.closest('.card').remove();
@@ -31,35 +27,32 @@ export function createCard (cardData, id) {
 
   const likeButton = cardElement.querySelector('.like-button');
   const likeCount = cardElement.querySelector('.like__count');
-  likeCount.textContent = cardData.likes.length;
-  
+  likeCount.textContent =  Number(cardData.likes.length);
   likeButton.addEventListener('click', function(evt){
-        if(!evt.target.classList.contains('like-button_active')) {
-          fetch(`https://mesto.nomoreparties.co/v1/plus-cohort-14/cards/likes/${cardData._id}`,{
-            method: 'PUT',
-            headers: {
-            authorization: 'bff12cd7-d8f7-418f-b6b2-2cd8334e6767'}
-          })
-          .then((res) =>{
-            if (res.ok) {
-              evt.target.classList.add('like-button_active');
-             }
-          })
-        }else{
-          fetch(`https://mesto.nomoreparties.co/v1/plus-cohort-14/cards/likes/${cardData._id}`,{
-            method: 'DELETE',
-            headers: {
-            authorization: 'bff12cd7-d8f7-418f-b6b2-2cd8334e6767'}
-          })
-          .then((res) =>{
-            if (res.ok) {
-              evt.target.classList.remove('like-button_active');
-             }
-          })
-        }
-      
+    if(!evt.target.classList.contains('like-button_active')) {
+      addLike(cardData)
+      .then((res) =>{
+        if (res.ok) {
+          evt.target.classList.add('like-button_active');
+          likeCount.textContent = Number(likeCount.textContent) + 1;
+         }
+      })
+    }else{
+      deleteLike(cardData)
+      .then((res) =>{
+        if (res.ok) {
+          evt.target.classList.remove('like-button_active');
+          likeCount.textContent = Number(likeCount.textContent) - 1;
+         }
+      })
+     }
   });
-  
+  cardData.likes.forEach(element => {
+    if (element._id === id){
+      likeButton.classList.add('like-button_active');
+    }
+  });
+
   const cardImage = cardElement.querySelector('.card__image');
       cardImage.addEventListener('click', function (evt) {
       fullImage.src = cardImage.src;
@@ -81,27 +74,18 @@ export function renderCard(card, container, isPrepend=true) {
 //Подгрузка карточек пользователем
 export function addNewPlace (evt){
   evt.preventDefault();
-
-fetch ('https://nomoreparties.co/v1/plus-cohort-14/cards', {
-  method: 'POST',
-  headers: {
-    authorization: 'bff12cd7-d8f7-418f-b6b2-2cd8334e6767',
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    name: `${cardName.value}`,
-    link: `${cardLink.value}`
-  })
-})
+  saving(true, cardUploadSubmitButton);
+  addCard()
   .then((res)=>{
+    if (res.ok) {
     return res.json();
+    }
+    return Promise.reject(res.status);
   })
   .then((data)=>{
-    console.log (data);
-    renderCard(createCard(cardData, id), cardTemplate, true)
+    renderCard(createCard(data, id), cardTemplate, true)
     closePopup(popupNewCard);
     evt.target.reset();
   })
+  .finally(() => saving(false, cardUploadSubmitButton))
 };
-
-//    renderCard(createCard(element.name, element.link, element.likes), cardTemplate, false);
