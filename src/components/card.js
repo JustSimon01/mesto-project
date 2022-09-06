@@ -3,6 +3,7 @@ import {openPopup, closePopup, saving} from './modal.js';
 import {deleteCard, addLike, deleteLike, addCard} from './api.js'
 import {id} from './index.js'
 
+
 //Добавление карточки
 export function createCard (cardData, id) {
   const cardElement = card.querySelector('.card').cloneNode(true);
