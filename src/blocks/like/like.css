@@ -1,0 +1,7 @@
+.like{
+    margin: 0 5px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: center;
+}

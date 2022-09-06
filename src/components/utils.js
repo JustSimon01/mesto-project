@@ -53,3 +53,4 @@ export const nameInput = profileForm.querySelector('#name-input');
 export const profileName = document.querySelector('.profile__name');
 export const aboutInput = profileForm.querySelector('#about-input');
 export const profileCareer = document.querySelector('.profile__career');
+export const profileSubmitButton = profileForm.querySelector(settings.submitButtonSelector);
