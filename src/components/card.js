@@ -19,8 +19,13 @@ export function createCard (cardData, id) {
         .then((res) => {
            if (res.ok) {
            evt.target.closest('.card').remove();
+           return res;
           }
-          })
+          return Promise.reject(`Ошибка: ${res.status}`);
+        })
+        .catch((err) =>{
+          console.log(err);
+         })
       })
   }else{
     deleteButton.classList.add('card__delete-button_disabled');
@@ -30,22 +35,32 @@ export function createCard (cardData, id) {
   const likeCount = cardElement.querySelector('.like__count');
   likeCount.textContent =  Number(cardData.likes.length);
   likeButton.addEventListener('click', function(evt){
-    if(!evt.target.classList.contains('like-button_active')) {
+    if (!evt.target.classList.contains('like-button_active')) {
       addLike(cardData)
       .then((res) =>{
         if (res.ok) {
           evt.target.classList.add('like-button_active');
           likeCount.textContent = Number(likeCount.textContent) + 1;
+          return res;
          }
+         return Promise.reject(`Ошибкrrа: ${res.status}`);
       })
+      .catch((err) =>{
+        console.log(err);
+       })
     }else{
       deleteLike(cardData)
       .then((res) =>{
         if (res.ok) {
           evt.target.classList.remove('like-button_active');
           likeCount.textContent = Number(likeCount.textContent) - 1;
+          return res;
          }
+         return Promise.reject(`Ошибкdfsа: ${res.status}`);
       })
+      .catch((err) =>{
+        console.log(err);
+       })
      }
   });
   cardData.likes.forEach(element => {
@@ -72,6 +87,12 @@ export function renderCard(card, container, isPrepend=true) {
   }
 } 
 
+export function downloadCards(arr, id) {
+  arr.forEach((element) =>{
+    renderCard(createCard(element, id), cardTemplate, false);
+})
+}
+
 //Подгрузка карточек пользователем
 export function addNewPlace (evt){
   evt.preventDefault();
@@ -88,5 +109,8 @@ export function addNewPlace (evt){
     closePopup(popupNewCard);
     evt.target.reset();
   })
+  .catch((err) =>{
+    console.log(err);
+   })
   .finally(() => saving(false, cardUploadSubmitButton))
 };

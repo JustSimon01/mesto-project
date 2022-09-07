@@ -1,48 +1,45 @@
 import '../page/index.css'; //импорт главного файла стилей 
-import {openPopup, closePopup, closeHotkey, closeOverlay, profileFirstUpload, submitProfileForm, profileIconEdit, openProfileEdit, changeAvatar} from './modal.js';
-import {createCard, renderCard, addNewPlace} from './card.js';
-import {settings, cardUploadSubmitButton, avatarSubmitButton, profileAddButton, cardPopupCloseButton, closeButtons, profileEditButton, profileName, profileCareer, avatar, profilePopupCloseButton, profileForm, nameInput, fullImagePopupClose, cardUploadForm, cardUploadPopup, cardTemplate, fullImagePopup, avatarEditCloseButton, profileAvatar, profileEditPopup, avatarEditPopup, avatarLinkInput, aboutInput} from './utils.js';
-import {showInputError, hideInputError, isValid, setEventListeners, hasInvalidInput, toggleButtonState, enableValidation, inputList, buttonElement, submitDeactivation} from './validate.js';
-import {getCards, getProfileInfo} from './api.js';
+import {openPopup, closePopup, submitProfileForm, profileIconEdit, openProfileEdit, changeAvatar} from './modal.js';
+import {createCard, renderCard, addNewPlace, downloadCards} from './card.js';
+import {settings, cardUploadSubmitButton, avatarSubmitButton, profileAddButton, closeButtons, profileEditButton, profileName, profileCareer, avatar, profileForm, nameInput, cardUploadForm, cardUploadPopup, cardTemplate, avatarEditCloseButton, profileAvatar, avatarEditPopup, aboutInput} from './utils.js';
+import {enableValidation,submitDeactivation} from './validate.js';
+import {getCards, getProfileInfo, getResponseData} from './api.js';
 
+export let id = '';
 
 //подгрузка данных профиля с сервера
-export let id = '';
 function profileInfo() {
-  getProfileInfo()
+return getProfileInfo()
   .then((res) => {
-    if (res.ok){
-      return res.json();
-}
-  return Promise.reject(res.status);
+    return getResponseData(res);
 })
-  .then((data)=>{
-    profileName.textContent=data.name;
-    profileCareer.textContent=data.about;
-    avatar.style.backgroundImage=`url(${data.avatar})`;
-    return id = `${data._id}`;
+}
+
+// подгрузка карточек с сервера
+function uploadCards(){
+  return getCards()
+  .then((res)=>{
+    return getResponseData(res);
   })
 }
 
 //запросы к серверу
-  // подгрузка данных пользователя
-profileInfo()
-  // подгрузка карточек с сервера
-getCards()
-  .then((res)=>{
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
-   .then((data)=>{
-    data.forEach((element) =>{
-    renderCard(createCard(element, id), cardTemplate, false);
-  })
-  });
-//первичная подгрузка форм
-profileFirstUpload();
+Promise.all([profileInfo(), uploadCards()])
+.then(([data, res])=>{
+  profileName.textContent=data.name;
+  profileCareer.textContent=data.about;
+  nameInput.value = data.name;
+  aboutInput.value = data.about;
+  avatar.style.backgroundImage=`url(${data.avatar})`;
+  downloadCards(res, data._id);
+  enableValidation(settings); //запускаем валидацию после подгрузки всех полей (что бы не срабатывала на пустые поля)
+  return id = `${data._id}`;
+})
+  .catch((err)=>{
+  console.log(err);
+ }) 
 
+ //Add card button
 profileAddButton.addEventListener('click', function(){openPopup(cardUploadPopup)});
 // Profile Edit Button
 profileEditButton.addEventListener('click', openProfileEdit);
@@ -63,6 +60,3 @@ profileAvatar.addEventListener('click', function(){openPopup(avatarEditPopup)});
 //подгрузка аватара по ссылке
 const avatarForm = document.querySelector('#change-avatar');
 avatarForm.addEventListener('submit', function (evt){changeAvatar(evt); submitDeactivation(avatarSubmitButton)});
-
-//валидация
-enableValidation(settings);
