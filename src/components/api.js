@@ -76,7 +76,7 @@ export function addCard() {
 }
 
 export function changeProfileForm() {
-  return fetch('https://mesto.nomoreparties.co/v1/plus-cohort-14/users/me', {
+  return fetch(`${config.baseURL}/users/me`, {
     method: 'PATCH',
     headers: config.headers,
     body: JSON.stringify({
