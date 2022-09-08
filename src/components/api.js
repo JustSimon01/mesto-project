@@ -13,6 +13,9 @@ export function getProfileInfo() {
     method: 'GET',
     headers: config.headers
   })
+  .then((res) => {
+    return getResponseData(res)
+  })
 }
 
 export function patchProfileInfo() {
@@ -24,6 +27,9 @@ export function patchProfileInfo() {
       about: `${aboutInput.value}`
     })
   })
+  .then((res) => {
+    return getResponseData(res)
+  })
 }
 
 export function patchAvatar() {
@@ -34,12 +40,18 @@ export function patchAvatar() {
       avatar: `${avatarLinkInput.value}`
     })
   })
+  .then((res) => {
+    return getResponseData(res)
+  })
 }
 
 export function getCards() {
   return fetch (`${config.baseURL}/cards`,{
     method: 'GET',
     headers: config.headers
+  })
+  .then((res) => {
+    return getResponseData(res)
   })
 };
 
@@ -48,13 +60,19 @@ export function deleteCard(cardData) {
     method: 'DELETE',
     headers: config.headers
   })
+  .then((res) => {
+    return getResponseData(res)
+  })
 };
 
 export function addLike(cardData) {
   return fetch(`${config.baseURL}/cards/likes/${cardData._id}`,{
     method: 'PUT',
     headers: config.headers
-      })
+  })
+  .then((res) => {
+    return getResponseData(res)
+  })
 }
 
 export function deleteLike(cardData) {
@@ -62,6 +80,9 @@ export function deleteLike(cardData) {
     method: 'DELETE',
     headers: config.headers
     })
+  .then((res) => {
+  return getResponseData(res)
+  })
 }
 
 export function addCard() {
@@ -73,6 +94,9 @@ export function addCard() {
       link: `${cardLink.value}`
     })
 })
+.then((res) => {
+  return getResponseData(res)
+})
 }
 
 export function changeProfileForm() {
@@ -83,6 +107,9 @@ export function changeProfileForm() {
       name: `${nameInput.value}`,
       about: `${aboutInput.value}`
     })
+  })
+  .then((res) => {
+    return getResponseData(res)
   })
 }
 
