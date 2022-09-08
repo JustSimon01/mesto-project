@@ -5,14 +5,14 @@ import {getProfileInfo, patchProfileInfo, patchAvatar} from './api.js'
 export function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closeHotkey);
-    document.addEventListener('click', closeOverlay);
+    popup.addEventListener('click', closeOverlay);
 } 
   
   //закрыть попап
 export function closePopup(popup) {
     popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', closeHotkey);
-    document.removeEventListener('click', closeOverlay);
+    popup.removeEventListener('click', closeOverlay);
 } 
 
 //закрытие попапа через Esc
@@ -31,9 +31,9 @@ export function closeOverlay(evt) {
 }
 
 //первичная подгрузка имени и "о себе" в форму
-export function profileFirstUpload(){
-  profileName.textContent=`${nameInput.value}`;
-  profileCareer.textContent=`${aboutInput.value}`;
+export function profileFirstUpload(data){
+  nameInput.value = data.name; 
+  aboutInput.value = data.about; 
 };
 
 //связка данных введенных в форму с полями на странице
@@ -42,14 +42,9 @@ export function submitProfileForm (evt) {
   saving(true, profileSubmitButton);
   patchProfileInfo()
     .then((res) => {
-      if (res.ok) {
         profileName.textContent=`${nameInput.value}`;
         profileCareer.textContent=`${aboutInput.value}`;
         closePopup(profileEditPopup);
-        return res.json();
-      }else{
-      return Promise.reject(res.status);
-      }
     })
     .finally(() => saving(false, profileSubmitButton))
 };
@@ -72,13 +67,9 @@ export function changeAvatar(evt) {
   saving(true, avatarSubmitButton);
   patchAvatar()
    .then((res)=>{
-     if (res.ok) {
        avatar.style.backgroundImage = `url(${avatarLinkInput.value})`;
        evt.target.reset();
        closePopup(avatarEditPopup);
-     }else{
-     return Promise.reject(res.status);
-     }
    })
    .finally(() => saving(false, avatarSubmitButton))
 }

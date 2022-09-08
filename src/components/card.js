@@ -17,11 +17,8 @@ export function createCard (cardData, id) {
     deleteButton.addEventListener('click', function (evt) {
       deleteCard(cardData)
         .then((res) => {
-           if (res.ok) {
            evt.target.closest('.card').remove();
            return res;
-          }
-          return Promise.reject(`Ошибка: ${res.status}`);
         })
         .catch((err) =>{
           console.log(err);
@@ -38,12 +35,9 @@ export function createCard (cardData, id) {
     if (!evt.target.classList.contains('like-button_active')) {
       addLike(cardData)
       .then((res) =>{
-        if (res.ok) {
           evt.target.classList.add('like-button_active');
-          likeCount.textContent = Number(likeCount.textContent) + 1;
+          likeCount.textContent = res.likes.length;
           return res;
-         }
-         return Promise.reject(`Ошибкrrа: ${res.status}`);
       })
       .catch((err) =>{
         console.log(err);
@@ -51,12 +45,9 @@ export function createCard (cardData, id) {
     }else{
       deleteLike(cardData)
       .then((res) =>{
-        if (res.ok) {
           evt.target.classList.remove('like-button_active');
-          likeCount.textContent = Number(likeCount.textContent) - 1;
+          likeCount.textContent = res.likes.length;
           return res;
-         }
-         return Promise.reject(`Ошибкdfsа: ${res.status}`);
       })
       .catch((err) =>{
         console.log(err);
@@ -98,12 +89,6 @@ export function addNewPlace (evt){
   evt.preventDefault();
   saving(true, cardUploadSubmitButton);
   addCard()
-  .then((res)=>{
-    if (res.ok) {
-    return res.json();
-    }
-    return Promise.reject(res.status);
-  })
   .then((data)=>{
     renderCard(createCard(data, id), cardTemplate, true)
     closePopup(popupNewCard);
