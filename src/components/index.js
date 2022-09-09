@@ -14,7 +14,7 @@ Promise.all([getProfileInfo(), getCards()])
   profileCareer.textContent=data.about;
   avatar.style.backgroundImage=`url(${data.avatar})`;
   downloadCards(res, data._id);
-  return id = `${data._id}`;
+  id = `${data._id}`;
 })
   .catch((err)=>{
   console.log(err);
